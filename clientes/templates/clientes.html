@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'clientes/css/clientes.css' %}">
+{% endblock %}
+
+{% block 'dashboard' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md card-dashboard">
+                <p onclick="exibir_form('1')" class="text-card">Adicionar Clientes</p>
+            </div>
+            <div class="col-md card-dashboard">
+                <p onclick="exibir_form('2')" class="text-card">Atualizar Clientes</p>
+            </div>
+        </div>
+        <div id="cadastrar-cliente" class="cadastrar-cliente">
+            <form action="{% url 'clientes' %}" method="POST">{% csrf_token %}
+                <div class="row">
+                    <div class="col-md">
+                        <p>Nome:</p>
+                        <input type="text" class="form-control" placeholder="Primeiro nome" name="nome" value="{{nome}}">
+                    </div>
+                    <div class="col-md">
+                        <p>Sobrenome:</p>
+                        <input type="text" class="form-control" placeholder="Sobrenome" name="sobrenome" value="{{sobrenome}}">
+                    </div>
+                </div>
+                <br>
+                <p>E-mail:</p>
+                <input type="email" class="form-control" placeholder="nome@email.com" name="email" value="{{email}}">
+                <br>
+                <p>CPF:</p>
+                <input type="text" class="form-control" placeholder="___.___.___-__" name="cpf" value="{{cpf}}">
+                <hr style="background-color:gray;">
+                <div class="add-carros">
+                    <h3>Carros</h3>
+                    <span class="btn-add-carros" onclick="add_carro()">+ Adicionar um carro</span>
+      
+                    <div id="form-carro">
+                        {% for carro, placa, ano in carros %}
+                            <br>
+                            <div class='row'>
+                                <div class='col-md'>
+                                    <input type='text' placeholder='carro' class='form-control' name='carro' value="{{carro}}">
+                                </div>
+                                <div class='col-md'>
+                                    <input type='text' placeholder='placa' class='form-control' name='placa' value="{{placa}}">
+                                </div>
+                                <div class='col-md'>
+                                    <input type='number' placeholder='ano' class='form-control' name='ano' value="{{ano}}">
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div> 
+                </div>
+
+                <br>
+                <input type="submit" value="Cadastrar" class="btn-principal">
+            </form>
+            
+        </div>
+        <div id="atualizar-cliente" class="atualizar-cliente">
+            <br>
+            <select id="cliente-select" onchange="dados_cliente()" name="" class="form-control">
+                <option></option>
+                {% for cliente in clientes %}
+                    <option value="{{cliente.id}}">{{cliente.nome}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <hr style="background-color: gray;">
+            <div id="form-att-cliente">
+                <input id="id" type="hidden" value="">
+                <div class="row">
+                    <div class='col-md'>
+                        <p>Nome:</p>
+                        <input type="text" id="nome" class="form-control">
+                    </div>
+                    <div class='col-md'>
+                        <p>Sobrenome:</p>
+                        <input type="text" id="sobrenome" class="form-control">
+                    </div>
+                </div>
+                <p>Email:</p>
+                <input type="text" id="email" class="form-control">
+                <p>CPF:</p>
+                <input type="text" id="cpf" class="form-control">
+                
+                <br>
+                <input type="submit" onclick="update_cliente()" value="Salvar" class="btn btn-success">
+                
+                <hr style="background-color: gray;">
+                <h3>Carros</h3>
+                <div id="carros">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'clientes/js/clientes.js' %}"></script>
+{% endblock %}
+
