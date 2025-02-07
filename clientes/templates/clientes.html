@@ -63,8 +63,9 @@
         </div>
         <div id="atualizar-cliente" class="atualizar-cliente">
             <br>
+            <p>Escolher Cliente:</p>
             <select id="cliente-select" onchange="dados_cliente()" name="" class="form-control">
-                <option></option>
+                <option selected disabled>Selecionar o cliente</option>
                 {% for cliente in clientes %}
                     <option value="{{cliente.id}}">{{cliente.nome}}</option>
                 {% endfor %}

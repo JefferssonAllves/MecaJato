@@ -17,7 +17,6 @@ function exibir_form(tipo){
         add_cliente.style.display = "none";
         att_cliente.style.display = "block";
     }
-
 }
 
 function dados_cliente(){

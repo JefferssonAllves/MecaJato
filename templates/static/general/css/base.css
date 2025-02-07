@@ -243,6 +243,24 @@
   font-weight: 500;
   margin: 18px
 }
+.card-dashboard{
+
+  background-color: var(--main-color);
+  width: 50%;
+  margin-left: 10px;
+  margin-top: 40px;
+  text-align: center;
+  padding: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+
+}
+.text-card{
+
+  font-size: 25px;
+
+}
+
 @media (max-width: 420px) {
   .sidebar li .tooltip{
     display: none;

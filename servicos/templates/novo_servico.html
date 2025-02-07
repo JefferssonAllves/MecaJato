@@ -2,13 +2,49 @@
 {% load static %}
 
 {% block 'head' %}
-    <link rel="stylesheet" href="{% static 'clientes/css/clientes.css' %}">
+    <link rel="stylesheet" href="{% static 'servicos/css/servicos.css' %}">
 {% endblock %}
 
 {% block 'dashboard' %}
-    <br>
-    <br>
     <div class="container">
-        {{form}}
+        <div class="row">
+            <div class="col-md card-dashboard">
+                <p onclick="exibir_form('1')" class="text-card">Categoria de Serviço</p>
+            </div>
+            <div class="col-md card-dashboard">
+                <p onclick="exibir_form('2')" class="text-card">Ordem de Serviço</p>
+            </div>
+        </div>
+        <div id="categoria-servico">
+            <form action="{% url 'adicionar_categoria' %}" method="POST">{% csrf_token %}
+                <label for="">Nome do serviço oferecido</label>
+                <input type="text" name="titulo_servico" class="form-control">
+                <br>
+                <label for="">Preço do serviço</label>
+                <input type="text" name="preco_servico" class="form-control">
+                <br>
+                <button class="btn btn-success" type="submit">Adicionar Serviço</button>
+            </form>
+        </div>
+        <div id="ordem-servico">
+            <form action="" method="POST">{% csrf_token %}
+                <div class="row">
+                    <div class="col-md">
+                        <label for="">Titulo do Serviço</label>
+                        <input class="form-control" type="text" placeholder="Titulo do Serviço">
+                    </div>
+                    <div class="col-md">
+                        <label for="">Cliente</label>
+                        <select name="" id="" class="form-control">
+                            <option selected disabled>Selecionar o cliente</option>
+                            {% for cliente in clientes %}
+                                <option value="{{cliente.id}}">{{cliente.nome}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
+    <script src="{% static 'servicos/js/servicos.js' %}"></script>
 {% endblock %}
