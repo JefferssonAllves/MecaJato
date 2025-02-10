@@ -30,7 +30,9 @@ function dados_cliente(){
         }).then(function(result){
             return result.json()
         }).then(function(data){
-            carro_select = document.getElementById('carro-select')
+            carro_select = document.getElementById('carro')
+            carro_select.innerHTML = ''
+            
             for(i=0; i<data['carros'].length; i++){
                 nova_opcao = document.createElement('option')
                 nova_opcao.value = data['carros'][i]['id']
@@ -42,13 +44,15 @@ function dados_cliente(){
 }
 function att_preco(){
     select = document.getElementById('select-manutencao');
+    input_valor_total = document.getElementById('input-valor-total');
     valor_total = document.getElementById('valor-total');
 
-    preco_selecionados = Array.from(select.selectedOptions).map(option => option.value);
+    preco_selecionados = Array.from(select.selectedOptions).map(option => option.text);
     preco_total = 0
     for(i=0; i<preco_selecionados.length; i++){
-        preco_total += parseFloat(preco_selecionados[i])
+        preco_total += parseFloat(preco_selecionados[i].slice(preco_selecionados[i].indexOf('$')+1));
     }
+    input_valor_total.value = preco_total
     preco_total = "TOTAL: R$" + preco_total
     valor_total.innerHTML = preco_total
 }

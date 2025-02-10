@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+{% endblock %}
+
+{% block 'dashboard' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md card-dashboard">
+                <p onclick="mostrar_tabela('1')" class="text-card">Ordens de Serviço</p>
+            </div>
+            <div class="col-md card-dashboard">
+                <p onclick="mostrar_tabela('2')" class="text-card">Clientes</p>
+            </div>
+            <div class="col-md card-dashboard">
+                <p onclick="mostrar_tabela('3')" class="text-card">Carros</p>
+            </div>
+            <div class="col-md card-dashboard">
+                <p onclick="mostrar_tabela('4')" class="text-card">Serviços</p>
+            </div>
+        </div>
+        <div id="ordem-servico">
+            <h3 class="titulo-tabela">Ordens de Serviços</h3>
+                <div class="container-tabela">
+                <table class="table table-hover table-bordered table-striped table-dark" >
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Titulo do Serviço</th>
+                            <th scope="col">Data de Inicio</th>
+                            <th scope="col">Data de Entrega</th>
+                            <th scope="col">Total do Pedido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for servico in ordem_servicos %}
+                            <tr>
+                                <th scope="row">{{servico.id}}</th>
+                                <td>{{servico.titulo}}</td>
+                                <td>{{servico.data_inicio}}</td>
+                                <td>{{servico.data_entrega}}</td>
+                                <td>R${{servico.total_pedido}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="clientes">
+            <div class="container-tabela">
+                <h3 class="titulo-tabela">Clientes Cadastrados</h3>
+                <table class="table table-hover table-bordered table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Sobrenome</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">CPF</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cliente in clientes %}
+                            <tr>
+                                <th scope="row">{{cliente.id}}</th>
+                                <td>{{cliente.nome}}</td>
+                                <td>{{cliente.sobrenome}}</td>
+                                <td>{{cliente.email}}</td>
+                                <td>{{cliente.cpf}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="carros">
+            <div class="container-tabela">
+                <h3 class="titulo-tabela">Carros Cadastrados</h3>
+                <table class="table table-hover table-bordered table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Carro</th>
+                            <th scope="col">Placa</th>
+                            <th scope="col">Ano</th>
+                            <th scope="col">Lavagens</th>
+                            <th scope="col">Consertos</th>
+                            <th scope="col">ID Do Cliente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for carro in carros %}
+                            <tr>
+                                <th scope="row">{{carro.id}}</th>
+                                <td>{{carro.carro}}</td>
+                                <td>{{carro.placa}}</td>
+                                <td>{{carro.ano}}</td>
+                                <td>{{carro.lavagens}}</td>
+                                <td>{{carro.consertos}}</td>
+                                <td>{{carro.cliente_id}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="servicos">
+            <div class="container-tabela">
+                <h3 class="titulo-tabela">Serviços Cadastrados</h3>
+                <table class="table table-hover table-bordered table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Preço do Serviço</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for manutencao in categoria_manutencao %}
+                            <tr>
+                                <th scope="row">{{manutencao.id}}</th>
+                                <td>{{manutencao.titulo}}</td>
+                                <td>{{manutencao.preco}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'home/js/home.js' %}"></script>
+{% endblock %}

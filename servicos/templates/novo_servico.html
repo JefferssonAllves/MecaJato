@@ -29,12 +29,12 @@
         <div id="ordem-servico">
             <form action="{% url 'novo_servico' %}" method="POST">{% csrf_token %}
                 <label for="">Titulo do Serviço</label>
-                <input class="form-control" type="text" placeholder="Titulo do Serviço">
+                <input class="form-control" name="titulo" type="text" placeholder="Titulo do Serviço">
                 <br>
                 <div class="row">
                     <div class="col-md">
                         <label for="">Cliente</label>
-                        <select onchange="dados_cliente()" id="id-cliente" class="form-control">
+                        <select onchange="dados_cliente()" id="id-cliente" name="cliente" class="form-control">
                             <option selected disabled>Selecionar o cliente</option>
                             {% for cliente in clientes %}
                             <option value="{{cliente.id}}">{{cliente.nome}}</option>
@@ -43,8 +43,7 @@
                     </div>
                     <div class="col-md">
                         <label for="">Carro do Cliente</label>
-                        <select class="form-control" name="" id="carro-select">
-                            <option selected disabled>Selecionar o carro do cliente</option>
+                        <select class="form-control" name="carro" id="carro">
                         </select>
                     </div>
                 </div>
@@ -52,25 +51,26 @@
                 <div class="row">
                     <div class="col-md">
                         <label for="">Escolher o tipo de manutenção</label>
-                        <select class="form-control" size="4" onchange="att_preco()" multiple name="" id="select-manutencao">
+                        <select class="form-control" size="4" onchange="att_preco()" multiple name="manutencao" id="select-manutencao">
                             <!-- <option selected disabled>Tipo de manutenção</option> -->
                             {% for manutencao in manutencoes %}
-                                <option value="{{manutencao.preco}}">{{manutencao.titulo}} - R${{manutencao.preco}}</option>
+                                <option value="{{manutencao.id}}">{{manutencao.titulo}} - R${{manutencao.preco}}</option>
                             {% endfor %}
                         </select>
                     </div>
                     <div class="col-md">
                         <label for="">Data de inicio</label>
-                        <input class="form-control" type="date" name="" id="">
+                        <input class="form-control" type="date" name="data_inicio" id="">
     
                         <label for="">Data de entrega</label>
-                        <input class="form-control" type="date" name="" id="">
+                        <input class="form-control" type="date" name="data_entrega" id="">
                     </div>
                 </div>
                 <br>
                 <hr style="background-color: gray;">
                 <div class="row">
                     <div class="col-md">
+                        <input id="input-valor-total" type="hidden" value="" name="total">
                         <h3 id="valor-total">TOTAL: R$0</h3>
                     </div>
                 </div>

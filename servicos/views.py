@@ -1,15 +1,35 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from clientes.models import Cliente, Carro
-from .models import CategoriaManutencao
+from .models import CategoriaManutencao, Servico
 import json
 from django.core import serializers
-
-
+from datetime import datetime
 
 
 # Create your views here.
 def novo_servico(request):
+    if request.method == 'POST':
+        titulo = request.POST.get('titulo')
+        cliente = Cliente.objects.get(id=int(request.POST.get('cliente')))
+        carro = Carro.objects.get(id=int(request.POST.get('carro')))
+        lista_manutencoes = [CategoriaManutencao.objects.get(id=id_manutencao) for id_manutencao in request.POST.getlist('manutencao')]
+        data_inicio = datetime.strptime(request.POST.get('data_inicio'), "%Y-%m-%d")
+        data_entrega = datetime.strptime(request.POST.get('data_entrega'), "%Y-%m-%d")
+        total_pedido = request.POST.get('total')
+            
+        servico = Servico(
+            titulo=titulo,
+            cliente=cliente,
+            carro_cliente=carro,
+            data_inicio=data_inicio,
+            data_entrega=data_entrega,
+            total_pedido=total_pedido
+        )
+        servico.save()
+        servico.manutencao.set(lista_manutencoes)
+
+        
     lista_clientes = Cliente.objects.all()
     lista_manutencoes = CategoriaManutencao.objects.all()
     

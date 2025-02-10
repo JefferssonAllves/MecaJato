@@ -107,3 +107,16 @@ function update_cliente(){
         }
     })
 }
+function mascaraCPF(input) {
+    var valor = input.value;
+  
+    // Remove todos os caracteres que não são números
+    valor = valor.replace(/\D/g, "");
+  
+    // Adiciona pontos e traço na posição correta
+    valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+    valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+    valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+  
+    input.value = valor;
+}
